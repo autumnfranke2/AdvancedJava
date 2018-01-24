@@ -1,3 +1,4 @@
+package Lab0;
 /*Autumn Franke*/
 import java.util.Scanner;
 public class RadiusofSphere {

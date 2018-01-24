@@ -1,4 +1,4 @@
-
+package Zoo;
 public class Rabbit extends Mammal {
 	
 	public int offspring;

@@ -1,3 +1,4 @@
+package Lab0;
 
 public class FactorialMain {
 

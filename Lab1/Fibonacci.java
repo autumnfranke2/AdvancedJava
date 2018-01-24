@@ -1,3 +1,4 @@
+package Lab1;
 
 public class Fibonacci {
 int n1=0,n2=1,n3=0;
