@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Stream {
 	Scanner scan = new Scanner(System.in);
-	String user;
+	String WriteinFile;
 	
-	public String WriteinFile; {
-		while(true) {
-			user = (scan.nextLine());
-			if(user.equals("")) {
-				break;
-			}
-			else {
-				return user;
-			}
-			}
+	public String getWriteinFile() {
+		return this.WriteinFile;
 	}
+	public void setWriteinFile(String writeinFile) {
+		this.WriteinFile = writeinFile;
+	}
+	
+	
+	
+	
+	
 
 }
