@@ -1,11 +1,11 @@
-package InClassSlide;
+/*package InClassSlide;
 
 import java.io.IOException;
 
 import java.io.*;
 
 public class FileReader {
-	
+
 	public static void main(String args[]){  
 		
 		try {
@@ -24,3 +24,4 @@ public class FileReader {
 	}
 
 }
+*/
