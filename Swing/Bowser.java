@@ -2,6 +2,7 @@ package Swing;
 
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.*;
@@ -25,35 +26,50 @@ public class Bowser {
 	
 	JEditorPane browserPane3 = new JEditorPane();
 	browserPane.setEditable(false);
+	
 	JTextField textArea = new JTextField();
 
 
+	
+	/* search bar and placement  and loading a web page*/
+	textArea.setBounds(0, 0, 1000, 1);
+	JButton button = new JButton("Go!!!!");
+	button.setBounds(600, 20, 50, 20);
+	button.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			textArea.setText("enter URL:");
+			try {
+				browserPane3.setPage(textArea.getText());  /* action listener will make this work */
+			}
+			catch (IOException e1) {
+				System.out.println("error loading page");
+			
+			}}});
+	
+		
 	try {
 		browserPane.setPage("http://www.google.com");
 		browserPane2.setPage(gu);  
-		browserPane3.setPage(textArea.getText());  /* action listener will make this work */
 	}
 	catch (IOException e) {
 		System.out.println("error loading page");
 	
 	}
 
-
+	/* tabs */
 	JFrame browserWindow = new JFrame("Autumn's Web Browser");
 	tabbedPane.addTab("Tab 1",  null, browserPane, "Does Nothing");
 	tabbedPane.addTab("Tab 2",  null, browserPane2, "Does Nothing");
 	tabbedPane.addTab("Tab 3",  null, browserPane3, "Does Nothing");
 	
-	
-	
 
+	browserPane3.add(button);
 	browserWindow.add(tabbedPane);
 	browserWindow.setSize(1200,900);
 	browserWindow.setVisible(true);
-	browserWindow.action(null, textArea);
-	}
-
 	
+	
+}
 }
 
 /*

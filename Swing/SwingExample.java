@@ -19,6 +19,7 @@ public class SwingExample {
 		button.setBounds(50, 100, 150, 50);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				textArea.setText("Example of an Event");
 				
 			}});
