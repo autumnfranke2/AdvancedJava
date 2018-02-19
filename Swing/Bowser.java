@@ -32,7 +32,7 @@ public class Bowser {
 	JTextField textArea = new JTextField();
 	
 	JButton button = new JButton("Go!!!!");
-	JButton backbutton = new JButton("<-");
+	JButton backbutton = new JButton("<");
 	
 	ArrayList<URL> previousPage = new ArrayList<URL>();
 	
@@ -52,7 +52,7 @@ public class Bowser {
 	button.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				browserPane3.setPage(textArea.getText());  /* action listener will make this work */
+				browserPane3.setPage(textArea.getText());
 			}
 			catch (IOException e1) {
 				System.out.println("error loading page");
@@ -68,7 +68,7 @@ public class Bowser {
 					try {
 						browserPane3.setPage(previousPage.get(0));
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						System.out.println("error loading page");
 					}
 				previousPage.remove(0);
 				}});

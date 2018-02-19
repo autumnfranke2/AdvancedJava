@@ -6,21 +6,18 @@ public class TicTacToeMain {
 
 	public static void main(String[] args) {
 		
-		{
 			createAndShowGUI();
 		}
 		private static void createAndShowGUI()
 		{
 		TicTacToeBoard Board = new TicTacToeBoard();
 
-		Frame frame = new JFrame(“Tic Tac Toe Board”);
-		Frame.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("Tic Tac Toe Board");
 
-		Frame.add(board);
-		Frame.setSize(322,422);
-		Frame.setVisible(true);
+		frame.add(Board);
+		frame.setSize(322,422);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
-
-	}
 
 }
