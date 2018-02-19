@@ -1,9 +1,10 @@
 package Swing;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 
@@ -28,16 +29,27 @@ public class Bowser {
 	browserPane.setEditable(false);
 	
 	JTextField textArea = new JTextField();
-
+	
+	JButton button = new JButton("Go!!!!");
+	JButton backbutton = new JButton("<-");
+	
+	ArrayList<URL> previousPage = new ArrayList<URL>();
+	
+	textArea.setText("Enter a URL: ");
 
 	
+	/* tabs */
+	JFrame browserWindow = new JFrame("Autumn's Web Browser");
+	tabbedPane.addTab("Tab 1",  null, browserPane, "Does Nothing");
+	tabbedPane.addTab("Tab 2",  null, browserPane2, "Does Nothing");
+	tabbedPane.addTab("Tab 3",  null, browserPane3, "Does Nothing");
+	
+	
 	/* search bar and placement  and loading a web page*/
-	textArea.setBounds(0, 0, 1000, 1);
-	JButton button = new JButton("Go!!!!");
-	button.setBounds(600, 20, 50, 20);
+	textArea.setBounds(20, 0, 1000, 20);
+	button.setBounds(1100, 0, 50, 20);
 	button.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			textArea.setText("enter URL:");
 			try {
 				browserPane3.setPage(textArea.getText());  /* action listener will make this work */
 			}
@@ -46,42 +58,36 @@ public class Bowser {
 			
 			}}});
 	
+	
+	/*Back Button */
+	backbutton.setBounds(0,0,20,20);
+	previousPage.add(browserPane3.getPage());
+	button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					try {
+						browserPane3.setPage(previousPage.get(0));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				previousPage.remove(0);
+				}});
+	
 		
 	try {
 		browserPane.setPage("http://www.google.com");
 		browserPane2.setPage(gu);  
 	}
 	catch (IOException e) {
-		System.out.println("error loading page");
-	
+		System.out.println("error loading page");	
 	}
 
-	/* tabs */
-	JFrame browserWindow = new JFrame("Autumn's Web Browser");
-	tabbedPane.addTab("Tab 1",  null, browserPane, "Does Nothing");
-	tabbedPane.addTab("Tab 2",  null, browserPane2, "Does Nothing");
-	tabbedPane.addTab("Tab 3",  null, browserPane3, "Does Nothing");
 	
-
 	browserPane3.add(button);
+	browserPane3.add(textArea);
+	browserPane3.add(backbutton);
 	browserWindow.add(tabbedPane);
 	browserWindow.setSize(1200,900);
 	browserWindow.setVisible(true);
-	
-	
+	browserWindow.setDefaultCloseOperation(browserWindow.EXIT_ON_CLOSE);	
 }
 }
-
-/*
- * java swing docs shows how to do tabs
- * 
- * Create a textArea that accepts a url, as well as a button that allows 
- * the page to load the contents of that URL.
-
-Create a back button that allows the user to navigate to a previously visited page
-
-Make the browser have an appealing appearance.
-
-Make your java application terminate when you close the browser window.
-
- */
