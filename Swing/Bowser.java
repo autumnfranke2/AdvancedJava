@@ -1,6 +1,7 @@
 package Swing;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -10,9 +11,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 public class Bowser {
+	static String previousPage ="";
+	static String currentPage = "";
 	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException {
 		
 	
 	String gu = "http://graceland.brightspace.com";
@@ -34,7 +37,6 @@ public class Bowser {
 	JButton button = new JButton("Go!!!!");
 	JButton backbutton = new JButton("<");
 	
-	ArrayList<URL> previousPage = new ArrayList<URL>();
 	
 	textArea.setText("Enter a URL: ");
 
@@ -52,6 +54,8 @@ public class Bowser {
 	button.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			try {
+				previousPage = currentPage;
+				currentPage = textArea.getText();
 				browserPane3.setPage(textArea.getText());
 			}
 			catch (IOException e1) {
@@ -62,15 +66,15 @@ public class Bowser {
 	
 	/*Back Button */
 	backbutton.setBounds(0,0,20,20);
-	previousPage.add(browserPane3.getPage());
-	button.addActionListener(new ActionListener() {
+	backbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					try {
-						browserPane3.setPage(previousPage.get(0));
+						browserPane3.setPage(previousPage);
+						textArea.setText(previousPage);
 					} catch (IOException e1) {
 						System.out.println("error loading page");
 					}
-				previousPage.remove(0);
+				
 				}});
 	
 		

@@ -1,6 +1,8 @@
 package Lab4;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -14,11 +16,13 @@ public class TicTacToeBoard extends JPanel {
 	setBackground(Color.white);
 	GameMouse gm = new GameMouse();
 	addMouseListener(gm);
+	
 
 }
 	int titleFontSize = 36;
 	ArrayList<DrawX> xList = new ArrayList<DrawX>();
 	ArrayList<DrawO> oList = new ArrayList<DrawO>();
+	
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -42,6 +46,19 @@ public class TicTacToeBoard extends JPanel {
 		DrawO testO = new DrawO(200,200);
 		g.drawString("O", testO.xCoord, testO.yCoord);*/
 		}
+	
+	
+	
+	/* Creates Tic Tac Toe Board */
+	
+	public void boardPane() {
+		final JPanel TTTBoard = new JPanel();
+		
+		GridLayout board2 = new GridLayout(3,3);
+		
+		TTTBoard.setLayout(board2);
+		
+	}
 	
 	class GameMouse implements MouseListener{
 
@@ -91,4 +108,10 @@ public class TicTacToeBoard extends JPanel {
 			this.yCoord = yCoord;
 		}
 	}
+	/*
+	 * class to alternate
+	 * while loop: while game isnt won alternate through x's and o's
+	 * if x starts alternate 9 times starting with x
+	 * if o starts alternate 9 times starting with o
+	 */
 }
