@@ -1,5 +1,6 @@
 package Lab4;
 import javax.swing.JButton;
+
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,10 +11,11 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TicTacToeBoard extends JPanel {
 	
-	private char snapGrid[][];
 	boolean isFull = true;
 	int titleFontSize = 36;
 	int InstructionsTitle = 24;
@@ -22,31 +24,75 @@ public class TicTacToeBoard extends JPanel {
 	ArrayList<DrawO> oList = new ArrayList<DrawO>();
 	
 	public TicTacToeBoard() {
-	snapGrid = new char[3][3];
-	setSize(322,422);
-	setBackground(Color.white);
-	GameMouse gm = new GameMouse();
-	addMouseListener(gm);
+		addMouseListener(new MouseAdapter() { 
+	          private char[][] snapGrid;
+
+			public void mousePressed(MouseEvent e) { 
+	        	  	snapGrid = new char[3][3];
+	  			DrawX x = new DrawX(e.getX()-10, e.getY()+10);
+				DrawO y = new DrawO(e.getX()-10, e.getY()+10);
+				boolean isXturn = true;
+				char mark = 'x';
+				
+				if(isXturn == true) {
+					x.DrawXs(getGraphics());
+					isXturn = false;
+				}
+				else {
+					y.DrawOs(getGraphics());
+					mark = 'o';
+					isXturn = true;
+					
+				}
+					if (e.getX()<=0 & e.getX()<=75) {
+						if(e.getY()<=150) {
+							this.snapGrid[1][1] = mark ;
+							
+						}
+						else if (e.getY()<=150 & e.getY()<=250){
+							this.snapGrid[2][1] = mark;
+						}
+						else{
+							this.snapGrid[3][1] = mark;
+							
+						}
+					}
+					else if (e.getX()>=75 & e.getX()<=100) {
+						if(e.getY()<=150) {
+							this.snapGrid[1][2] = mark;
+						}
+						else if (e.getY()<=150 & e.getY()<=250){
+							this.snapGrid[2][2] = mark;
+						}
+						else{
+							this.snapGrid[3][2] = mark;
+							
+						}
+					}
+					else if (e.getX()>=100) {
+						if(e.getY()<=150) {
+							this.snapGrid[1][3] = mark;
+						}
+						else if (e.getY()<=150 & e.getY()<=250){
+							this.snapGrid[2][3] = mark;
+						}
+						else{
+							this.snapGrid[3][3] = mark;
+						}
+					}
+				
+				Win();
+			}
+	          
+	        }); 
+		setSize(322,422);
+		setBackground(Color.white);
 	}
 	
 
-	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(Color.black);
-		// font is (font name, font.style, size)
-		
-		//TODO: 
-		//alternate x's and o's
-		//draw a winning line
-		//Game logic function:
-			// who's turn
-			// state of a board
-			//redraw board based on state of change
-			//check for victory/loss or draw
-			//update instructions base on events
-		
-		
 		g.setFont(new Font("Arial", Font.PLAIN, titleFontSize)); //alignment on the x coordinate
 		g.drawString("Tic Tac Toe", 55 , ((50 - titleFontSize) / 2 + titleFontSize)); //coordinates represent bottom left of text
 		
@@ -123,79 +169,9 @@ public class TicTacToeBoard extends JPanel {
 	private boolean rowCol(char rc1, char rc2, char rc3) {
 		return ((rc1 != '0') && (rc1 == rc2) && (rc2 == rc3));
 	}
+
 	
-	class GameMouse implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			boolean XDraw = false;
-			
-			
-			if (e.getX()<=0 & e.getX()<=75) {
-				if(e.getY()<=150) {
-					
-				}
-				else if (e.getY()<=150 & e.getY()<=250){
-					
-				}
-				else{
-					
-				}
-			}
-			else if (e.getX()>=75 & e.getX()<=100) {
-				if(e.getY()<=150) {
-				}
-				else if (e.getY()<=150 & e.getY()<=250){
-					
-				}
-				else{
-					
-				}
-			}
-			else if (e.getX()>=100) {
-				if(e.getY()<=150) {
-				}
-				else if (e.getY()<=150 & e.getY()<=250){
-					
-				}
-				else{
-					
-				}
-			}
-			
-			if(XDraw = false) {
-				DrawX x = new DrawX(e.getX()-10, e.getY()+10);
-			}
-			else{
-				DrawO o = new DrawO(e.getX()-10, e.getY()+10);
-				XDraw = false;
-			}
-			/*System.out.println(e.getX() + "" + e.getY());
-			DrawX x = new DrawX(e.getX()-10, e.getY()+10);
-			xList.add(x);
-			repaint();*/
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-		
-	}
-	
-	class DrawX {
+	class DrawX extends TicTacToeBoard {
 		int xCoord = 200;
 		int yCoord = 200;
 		
@@ -203,9 +179,14 @@ public class TicTacToeBoard extends JPanel {
 			this.xCoord = xCoord;
 			this.yCoord = yCoord;
 		}
-	}
+		void DrawXs(Graphics g) {
+				for (DrawX thisX : xList){
+					g.drawString("x", thisX.xCoord, thisX.yCoord);
+				}
+			}
+		}	
 	
-	class DrawO {
+	class DrawO extends TicTacToeBoard {
 		int xCoord = 200;
 		int yCoord = 200;
 		
@@ -213,17 +194,11 @@ public class TicTacToeBoard extends JPanel {
 			this.xCoord = xCoord;
 			this.yCoord = yCoord;
 		}
-	}
-	void DrawXs(Graphics g) {
-		for (DrawX thisX : xList){
-			g.drawString("x", thisX.xCoord, thisX.yCoord);
+	
+		void DrawOs(Graphics g) {
+			for (DrawO thisO : oList){
+				g.drawString("o", thisO.xCoord, thisO.yCoord);
 		}
 	}
-	
-	
-	void DrawYs(Graphics g) {
-		for (DrawO thisO : oList){
-			g.drawString("o", thisO.xCoord, thisO.yCoord);
-		}
-	}
+}
 }
