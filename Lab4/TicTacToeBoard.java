@@ -81,7 +81,7 @@ public class TicTacToeBoard extends JPanel {
 						}
 					}
 				
-				Win();
+				//Win();
 			}
 	          
 	        }); 
@@ -119,51 +119,51 @@ public class TicTacToeBoard extends JPanel {
 	}
 	
 		//checks the board to see if its empty or not
-	public boolean FullBoard() {
-		for(int s = 0; s<3; s++) {
-			for(int q = 0; q<3; q++) {
-				if(snapGrid[s][q] == '0') {
-					isFull = false;
-				}
-			}		
-		}
-			return isFull;
-	}	
-	
-	
-	// checks for an overall win
-	private boolean Win() {
-		return(rowWin() || columnWin() || diagonalWin());
-	}
-	
-	
-	// if its 3 in a row
-	private boolean rowWin() {
-		for(int r = 0; r<3; r++) {
-			if(rowCol(snapGrid[r][1],snapGrid[r][2],snapGrid[r][3]) == true) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
-	// if its 3 in a column
-	private boolean columnWin() {
-		for(int r = 0; r<3; r++) {
-			if(rowCol(snapGrid[1][r],snapGrid[2][r],snapGrid[3][r]) == true) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
-	// if its 3 in a diagonal
-	private boolean diagonalWin() {
-		return(rowCol(snapGrid[1][1], snapGrid[2][2], snapGrid[3][3]) == true) & 
-				(rowCol(snapGrid[1][3], snapGrid[2][2], snapGrid[3][1]) == true);
-	}
+//	public boolean FullBoard() {
+//		for(int s = 0; s<3; s++) {
+//			for(int q = 0; q<3; q++) {
+//				if(snapGrid[s][q] == '0') {
+//					isFull = false;
+//				}
+//			}		
+//		}
+//			return isFull;
+//	}	
+//	
+//	
+//	// checks for an overall win
+//	private boolean Win() {
+//		return(rowWin() || columnWin() || diagonalWin());
+//	}
+//	
+//	
+//	// if its 3 in a row
+//	private boolean rowWin() {
+//		for(int r = 0; r<3; r++) {
+//			if(rowCol(snapGrid[r][1],snapGrid[r][2],snapGrid[r][3]) == true) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//	
+//	
+//	// if its 3 in a column
+//	private boolean columnWin() {
+//		for(int r = 0; r<3; r++) {
+//			if(rowCol(snapGrid[1][r],snapGrid[2][r],snapGrid[3][r]) == true) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//	
+//	
+//	// if its 3 in a diagonal
+//	private boolean diagonalWin() {
+//		return(rowCol(snapGrid[1][1], snapGrid[2][2], snapGrid[3][3]) == true) & 
+//				(rowCol(snapGrid[1][3], snapGrid[2][2], snapGrid[3][1]) == true);
+//	}
 	
 	
 	private boolean rowCol(char rc1, char rc2, char rc3) {
